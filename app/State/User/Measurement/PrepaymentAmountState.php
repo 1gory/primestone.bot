@@ -60,6 +60,6 @@ class PrepaymentAmountState extends State
     public function sendData(): void
     {
         $ChatResponse = new ChatResponse($this->context->chat->getId());
-        $ChatResponse->sendText("Введите полученную сумму предоплаты", false);
+        $ChatResponse->prepaymentActions();
     }
 }

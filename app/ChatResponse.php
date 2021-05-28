@@ -233,6 +233,26 @@ class ChatResponse
         $this->sendMessage($params);
     }
 
+    public function prepaymentActions()
+    {
+        $params = [
+            'chat_id' => $this->chatId,
+            'text' => 'Введите полученную сумму предоплаты',
+            'reply_markup' => json_encode([
+                "resize_keyboard" => true,
+                "keyboard" => [
+                    [
+                        [
+                            "text" => self::MONEY_NOT_RECEIVED,
+                        ],
+                    ],
+                ],
+            ]),
+        ];
+
+        $this->sendMessage($params);
+    }
+
     public function monthsActions()
     {
         $params = [
