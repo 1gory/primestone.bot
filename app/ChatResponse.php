@@ -122,26 +122,6 @@ class ChatResponse
         $this->sendMessage($params);
     }
 
-    public function orderPriceActions()
-    {
-        $params = [
-            'chat_id' => $this->chatId,
-            'text' => 'Введите расчитанную сумму (смету) заказа',
-            'reply_markup' => json_encode([
-                "resize_keyboard" => true,
-                "keyboard" => [
-                    [
-                        [
-                            "text" => self::MONEY_NOT_RECEIVED,
-                        ],
-                    ],
-                ],
-            ]),
-        ];
-
-        $this->sendMessage($params);
-    }
-
     public function paymentMethodActions()
     {
         $params = [

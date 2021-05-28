@@ -1,8 +1,10 @@
 vendor/*
 logs/*
 
+.env
+
 credentials/*
-credentials/.gitkeep
+!credentials/.gitkeep
 
 data/users.txt
 data/chats_data/*
