@@ -4,6 +4,8 @@ class CancelMeasurementState extends State
 {
     public function handleRequest(): void
     {
+        $message = $this->context->messageText;
+
         $ChatResponse = new ChatResponse($this->context->chat->getId());
         $ChatResponse->sendText("Задача отменена, данные обновлены");
 
@@ -18,6 +20,7 @@ class CancelMeasurementState extends State
             "status_id" => CANCELING_THE_MEASUREMENT_STATUS_ID,
         ];
 
+        $connector->createNote($leadId, $message);
         $connector->updateLeads($data);
         $connector->createTask($leadId, 'Связаться с клиентом по отмене заказа', strtotime("+1 days"));
 

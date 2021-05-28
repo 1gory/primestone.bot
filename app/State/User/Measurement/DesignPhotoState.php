@@ -18,6 +18,7 @@ class DesignPhotoState extends State
 
         $connector = new AmoCrmConnector(AMOCRM_TOKENS_PATH);
         $connector->createNote($leadId, 'Фото чертежа:');
+        sleep(1);
         $connector->createNote($leadId,$_ENV['SERVER_URL'] . "/uploads/designs/$fileName");
 
         $this->context->chat->setState(OrderPriceState::class);
