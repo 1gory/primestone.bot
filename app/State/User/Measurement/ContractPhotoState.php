@@ -19,7 +19,7 @@ class ContractPhotoState extends State
         // Прикрепить ссылку в амо
         $connector = new AmoCrmConnector(AMOCRM_TOKENS_PATH);
         $connector->createNote($leadId, 'Фото договора:');
-        $connector->createNote($leadId,$_ENV['SERVER_URL'] . "/contracts/$fileName");
+        $connector->createNote($leadId,$_ENV['SERVER_URL'] . "/uploads/contracts/$fileName");
 
         $ChatResponse = new ChatResponse($this->context->chat->getId());
         $ChatResponse->sendText("Задача закрыта, данные обновлены");

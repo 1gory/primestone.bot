@@ -18,7 +18,7 @@ class MoneyPhotoState extends State
 
         $connector = new AmoCrmConnector(AMOCRM_TOKENS_PATH);
         $connector->createNote($leadId, 'Фото денег (чека):');
-        $connector->createNote($leadId,$_ENV['SERVER_URL'] . "/money/$fileName");
+        $connector->createNote($leadId,$_ENV['SERVER_URL'] . "/uploads/money/$fileName");
 
         $data = [
             "id" => (int)$leadId,
