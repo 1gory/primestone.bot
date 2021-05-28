@@ -292,7 +292,7 @@ class AmoCrmConnector
 
         $tokens = json_decode(file_get_contents($this->tokensPath), true);
         $access_token = $tokens['access_token'];
-        $this->sendCurlRequest($link, $data, ['Authorization: Bearer ' . $access_token], "PATCH");
+        $out = $this->sendCurlRequest($link, $data, ['Authorization: Bearer ' . $access_token], "PATCH");
 
         return;
     }

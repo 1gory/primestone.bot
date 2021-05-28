@@ -6,12 +6,12 @@ class PaymentMethodState extends State
     {
         $message = $this->context->messageText;
 
-        $prepaymentMethods = [
-            ChatResponse::PAYMENT_METHOD_CASH => CASH_PAYMENT_METHOD,
-            ChatResponse::PAYMENT_METHOD_SBER => SBER_PAYMENT_METHOD,
-            ChatResponse::PAYMENT_METHOD_BANK => BANK_PAYMENT_METHOD,
-            ChatResponse::PAYMENT_METHOD_TRMINAL => TERMINAL_PAYMENT_METHOD,
-        ];
+//        $prepaymentMethods = [
+//            ChatResponse::PAYMENT_METHOD_CASH => CASH_PAYMENT_METHOD,
+//            ChatResponse::PAYMENT_METHOD_SBER => SBER_PAYMENT_METHOD,
+//            ChatResponse::PAYMENT_METHOD_BANK => BANK_PAYMENT_METHOD,
+//            ChatResponse::PAYMENT_METHOD_TRMINAL => TERMINAL_PAYMENT_METHOD,
+//        ];
 
         $connector = new AmoCrmConnector(AMOCRM_TOKENS_PATH);
 
@@ -26,7 +26,7 @@ class PaymentMethodState extends State
                     "field_id" => PREPAYMENT_TYPE_FIELD_ID,
                     "values" => [
                         [
-                            "value" => $prepaymentMethods[$message],
+                            "value" => $message,
                         ],
                     ],
                 ],
@@ -43,6 +43,15 @@ class PaymentMethodState extends State
                 $this->context->transitionTo(new MoneyPhotoState());
                 break;
             case ChatResponse::PAYMENT_METHOD_BANK:
+
+                $data = [
+                    "id" => (int)$leadId,
+                    "status_id" => WAITING_FOR_PREPAYMENT_STATUS_ID,
+                ];
+
+                $connector->updateLeads($data);
+                $connector->createTask($leadId, 'Связаться с клиентом по предоплате', strtotime("+1 days"));
+
                 $this->context->chat->setState(ContractPhotoState::class);
                 $this->context->transitionTo(new ContractPhotoState());
                 break;

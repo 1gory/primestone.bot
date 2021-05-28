@@ -8,9 +8,8 @@ class RescheduleMeasurementDateState extends State
 
         $this->context->chat->setStepData($message, 'day');
 
-        $this->context->chat->flushData();
-        $this->context->chat->setState(InitialState::class);
-        $this->context->transitionTo(new InitialState());
+        $this->context->chat->setState(RescheduleMeasurementTimeState::class);
+        $this->context->transitionTo(new RescheduleMeasurementTimeState());
     }
 
     public function sendData(): void

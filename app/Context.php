@@ -56,6 +56,7 @@ class Context
                 $this->chat->setState(UserState::class);
                 $this->transitionTo(new UserState());
                 break;
+            case ChatResponse::CANCEL:
             case '/cancel':
                 $this->chat->flushData();
                 $this->chat->setState(InitialState::class);

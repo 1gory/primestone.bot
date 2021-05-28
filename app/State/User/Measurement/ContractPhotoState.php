@@ -21,14 +21,6 @@ class ContractPhotoState extends State
         $connector->createNote($leadId, 'Фото договора:');
         $connector->createNote($leadId,$_ENV['SERVER_URL'] . "/contracts/$fileName");
 
-        $data = [
-            "id" => (int)$leadId,
-            "status_id" => WAITING_FOR_PREPAYMENT_STATUS_ID,
-        ];
-
-        $connector->updateLeads($data);
-        $connector->createTask($leadId, 'Связаться с клиентом по предоплате', strtotime("+1 days"));
-
         $ChatResponse = new ChatResponse($this->context->chat->getId());
         $ChatResponse->sendText("Задача закрыта, данные обновлены");
 

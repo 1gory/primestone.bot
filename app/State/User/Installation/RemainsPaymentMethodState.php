@@ -4,13 +4,34 @@ class RemainsPaymentMethodState extends State
 {
     public function handleRequest(): void
     {
-
         $message = $this->context->messageText;
 
-        // todo добавить еще 2 метода оплаты + пробросить их в поле
+        $connector = new AmoCrmConnector(AMOCRM_TOKENS_PATH);
+
+        $data = $this->context->chat->getStepData();
+        $index = $data['taskNumber'] - 1;
+        $leadId = $data['leadsIds'][$index];
+
+        $data = [
+            "id" => (int)$leadId,
+            "custom_fields_values" => [
+                [
+                    "field_id" => REMAINS_PAYMENT_TYPE_FIELD_ID,
+                    "values" => [
+                        [
+                            "value" => $message,
+                        ],
+                    ],
+                ],
+            ]
+        ];
+
+        $connector->updateLeads($data);
 
         switch ($message) {
-            case ChatResponse::PAYMENT_METHOD_CASH_SBER:
+            case ChatResponse::PAYMENT_METHOD_CASH:
+            case ChatResponse::PAYMENT_METHOD_SBER:
+            case ChatResponse::PAYMENT_METHOD_TRMINAL:
                 $this->context->chat->setState(RemainsMoneyPhotoState::class);
                 $this->context->transitionTo(new RemainsMoneyPhotoState());
                 break;

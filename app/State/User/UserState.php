@@ -29,9 +29,11 @@ class UserState extends State
         $this->context->chat->setStepData($data['leadsIds'], 'leadsIds');
         $this->context->chat->setStepData($data['leadsType'], 'leadsType');
         $this->context->chat->setStepData($data['googleEventsIds'], 'googleEventsIds');
-        $ChatResponse->showAllTasks($data['text'], count($data['leadsIds']));
 
-        if (count($data['leadsIds'])) {
+        if (!count($data['leadsIds'])) {
+            $ChatResponse->sendText('Задачи на сегодня и завтра отсутсвтуют', true);
+        } else {
+            $ChatResponse->showAllTasks($data['text'], count($data['leadsIds']));
             $ChatResponse->sendText('Выберете номер задачи', false);
         }
     }

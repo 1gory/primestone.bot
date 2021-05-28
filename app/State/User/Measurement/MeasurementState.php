@@ -12,8 +12,8 @@ class MeasurementState extends State
                 $this->context->transitionTo(new DesignPhotoState());
                 break;
             case ChatResponse::MEASUREMENT_RESCHEDULE:
-                $this->context->chat->setState(RescheduleMeasurementDateState::class);
-                $this->context->transitionTo(new RescheduleMeasurementDateState());
+                $this->context->chat->setState(RescheduleMeasurementMonthState::class);
+                $this->context->transitionTo(new RescheduleMeasurementMonthState());
                 break;
             case ChatResponse::MEASUREMENT_CANCEL:
                 $this->context->chat->setState(CancelMeasurementState::class);

@@ -34,6 +34,6 @@ class MoneyPhotoState extends State
     public function sendData(): void
     {
         $ChatResponse = new ChatResponse($this->context->chat->getId());
-        $ChatResponse->sendText("Прикрепите фото денег (чека)", false);
+        $ChatResponse->sendText("Прикрепите фото денег (чека)", true);
     }
 }
