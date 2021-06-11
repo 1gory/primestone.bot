@@ -7,7 +7,8 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 const ADMINS_USERNAME = [
-    'igoryp'
+    'igoryp',
+    'pro_panch'
 ];
 
 const ROOT =  __DIR__ . '/../';
