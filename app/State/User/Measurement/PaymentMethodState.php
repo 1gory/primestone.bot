@@ -6,6 +6,18 @@ class PaymentMethodState extends State
     {
         $message = $this->context->messageText;
 
+        $prepaymentMethods = [
+            ChatResponse::PAYMENT_METHOD_CASH,
+            ChatResponse::PAYMENT_METHOD_SBER,
+            ChatResponse::PAYMENT_METHOD_BANK,
+            ChatResponse::PAYMENT_METHOD_TRMINAL,
+        ];
+
+        if (!in_array($message, $prepaymentMethods)) {
+            $this->setError('Неверный ввод');
+            return;
+        }
+
 //        $prepaymentMethods = [
 //            ChatResponse::PAYMENT_METHOD_CASH => CASH_PAYMENT_METHOD,
 //            ChatResponse::PAYMENT_METHOD_SBER => SBER_PAYMENT_METHOD,

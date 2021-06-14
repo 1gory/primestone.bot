@@ -21,9 +21,8 @@ class ContractPhotoState extends State
 
         // Прикрепить ссылку в амо
         $connector = new AmoCrmConnector(AMOCRM_TOKENS_PATH);
-        $connector->createNote($leadId, 'Фото договора:');
-        sleep(1);
-        $connector->createNote($leadId,$_ENV['SERVER_URL'] . "/uploads/contracts/$fileName");
+        $text = "Фото договора: \r\n" . $_ENV['SERVER_URL'] . "/uploads/contracts/$fileName";
+        $connector->createNote($leadId, $text);
 
         $this->context->chat->flushData();
         $this->context->chat->setState(InitialState::class);

@@ -18,8 +18,8 @@ class TabletopPhotoState extends State
 
         // Прикрепить ссылку в амо
         $connector = new AmoCrmConnector(AMOCRM_TOKENS_PATH);
-        $connector->createNote($leadId, 'Фото столешницы:');
-        $connector->createNote($leadId,$_ENV['SERVER_URL'] . "/uploads/tabletops/$fileName");
+        $text = "Фото столешницы: \r\n" . $_ENV['SERVER_URL'] . "/uploads/tabletops/$fileName";
+        $connector->createNote($leadId, $text);
 
         $this->context->chat->setState(CompletedContractPhotoState::class);
         $this->context->transitionTo(new CompletedContractPhotoState());

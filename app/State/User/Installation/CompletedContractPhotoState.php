@@ -17,8 +17,8 @@ class CompletedContractPhotoState extends State
         $fileName = FileUploader::downloadFile($leadId, 'acts', $photos);
 
         $connector = new AmoCrmConnector(AMOCRM_TOKENS_PATH);
-        $connector->createNote($leadId, 'Фото акта выполненных работ:');
-        $connector->createNote($leadId,$_ENV['SERVER_URL'] . "/uploads/acts/$fileName");
+        $text = "Фото акта выполненных работ:\r\n" . $_ENV['SERVER_URL'] . "/uploads/acts/$fileName";
+        $connector->createNote($leadId, $text);
 
         $this->context->chat->setState(RemainsPaymentMethodState::class);
         $this->context->transitionTo(new RemainsPaymentMethodState());

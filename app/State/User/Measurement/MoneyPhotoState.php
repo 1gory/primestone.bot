@@ -17,9 +17,9 @@ class MoneyPhotoState extends State
         $fileName = FileUploader::downloadFile($leadId, 'money', $photos);
 
         $connector = new AmoCrmConnector(AMOCRM_TOKENS_PATH);
-        $connector->createNote($leadId, 'Фото денег (чека):');
-        sleep(1);
-        $connector->createNote($leadId,$_ENV['SERVER_URL'] . "/uploads/money/$fileName");
+
+        $text = "Фото денег (чека):\r\n" . $_ENV['SERVER_URL'] . "/uploads/money/$fileName";
+        $connector->createNote($leadId, $text);
 
         $data = [
             "id" => (int)$leadId,

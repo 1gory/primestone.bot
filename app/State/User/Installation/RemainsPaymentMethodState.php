@@ -6,6 +6,18 @@ class RemainsPaymentMethodState extends State
     {
         $message = $this->context->messageText;
 
+        $prepaymentMethods = [
+            ChatResponse::PAYMENT_METHOD_CASH,
+            ChatResponse::PAYMENT_METHOD_SBER,
+            ChatResponse::PAYMENT_METHOD_BANK,
+            ChatResponse::PAYMENT_METHOD_TRMINAL,
+        ];
+
+        if (!in_array($message, $prepaymentMethods)) {
+            $this->setError('Неверный ввод');
+            return;
+        }
+
         $connector = new AmoCrmConnector(AMOCRM_TOKENS_PATH);
 
         $data = $this->context->chat->getStepData();

@@ -6,7 +6,8 @@ class AdminState extends State
     {
         switch ($this->context->messageText) {
             case ChatResponse::REFRESH_USERS:
-
+                $response = new ChatResponse($this->context->chat->getId());
+                $response->sendText("Подождите несколько секунд...");
                 // забрать данные из таблицы
                 $googleSheetData = GoogleSheet::getSheetData();
 
@@ -15,7 +16,7 @@ class AdminState extends State
                 $fields = $connector->getFieldsInfo();
 
                 foreach ($fields['_embedded']['custom_fields'] as $field) {
-                    if (!($field['id'] === 1166651 || $field['id'] === 1166649)) {
+                    if (!($field['id'] === AMO_MEASURER_FIELD_ID || $field['id'] === AMO_INSTALLER_FIELD_ID)) {
                         continue;
                     }
 
@@ -58,8 +59,6 @@ class AdminState extends State
                 // обновить календари
                 GoogleCalendarData::updateCalendars($updatedUsersNames);
 
-
-                $response = new ChatResponse($this->context->chat->getId());
                 $users = implode("\r\n", $updatedUsersList);
                 $response->sendText("Персонал обновлен:\r\n$users");
 

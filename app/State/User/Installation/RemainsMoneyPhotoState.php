@@ -18,10 +18,8 @@ class RemainsMoneyPhotoState extends State
 
         // Прикрепить ссылку в амо
         $connector = new AmoCrmConnector(AMOCRM_TOKENS_PATH);
-        $connector->createNote($leadId, 'Фото остатка денег:');
-        $connector->createNote($leadId,$_ENV['SERVER_URL'] . "/uploads/money/$fileName");
-
-        // todo обновить данные по сделке (тип остатка оплаты)
+        $text = "Фото остатка денег: \r\n" . $_ENV['SERVER_URL'] . "/uploads/money/$fileName";
+        $connector->createNote($leadId, $text);
 
         $data = [
             "id" => (int)$leadId,

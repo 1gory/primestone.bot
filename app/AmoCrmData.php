@@ -111,8 +111,9 @@ class AmoCrmData
                     $res = $connector->getContactInfo($contactId);
                     $tasksText .= '*Имя клиента*: ' . $res['name'] . "\r\n";
                     $tasksText .= '*Телефон*: ' . self::getCustomField($res['custom_fields_values'], 'Телефон') . "\r\n";
-                    $tasksText .= '*Адрес клиента*: ' . self::getCustomField($res['custom_fields_values'], 'Адрес клиента') . "\r\n";
                 }
+
+                $tasksText .= '*Адрес клиента*: ' . self::getCustomField($lead['custom_fields_values'], 'Адрес клиента') . "\r\n";
 
                 $tasksText .= $preliminarilyCost ? '*Предварительная стоимость*: ' . $preliminarilyCost . "\r\n" : '';
                 $tasksText .= $surcharge ? '*Доплата на монтаже*: ' . $surcharge . "\r\n" : '';

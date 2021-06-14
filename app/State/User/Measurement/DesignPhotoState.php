@@ -17,9 +17,8 @@ class DesignPhotoState extends State
         $fileName = FileUploader::downloadFile($leadId, 'designs', $photos);
 
         $connector = new AmoCrmConnector(AMOCRM_TOKENS_PATH);
-        $connector->createNote($leadId, 'Фото чертежа:');
-        sleep(1);
-        $connector->createNote($leadId,$_ENV['SERVER_URL'] . "/uploads/designs/$fileName");
+        $text = "Фото чертежа: \r\n" . $_ENV['SERVER_URL'] . "/uploads/designs/$fileName";
+        $connector->createNote($leadId, $text);
 
         $this->context->chat->setState(OrderPriceState::class);
         $this->context->transitionTo(new OrderPriceState());

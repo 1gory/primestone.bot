@@ -61,15 +61,15 @@ class GoogleCalendarData
         $calendarsForAdding = [];
         $calendarId = null;
 
-        foreach ($usersNames as $userName) {
-            foreach ($calendarList['items'] as $calendar) {
-
+        $calendarsForDelete = $calendarList['items'];
+        foreach ($calendarList['items'] as $key => $calendar) {
+            foreach ($usersNames as $userName) {
                 if ($calendar['summary'] === $userName) {
+                    unset($calendarsForDelete[$key]);
                     continue(2);
                 }
+                $calendarsForAdding[] = $userName;
             }
-
-            $calendarsForAdding[] = $userName;
         }
 
         foreach ($calendarsForAdding as $calendarName) {
@@ -79,6 +79,10 @@ class GoogleCalendarData
 
             $service->calendars->insert($calendar);
         }
+
+//        foreach ($calendarsForDelete as $calendar) {
+//            $service->calendars->delete($calendar['id']);
+//        }
     }
 
     static function getTasks($userName)
