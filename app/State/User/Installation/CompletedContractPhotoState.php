@@ -27,6 +27,6 @@ class CompletedContractPhotoState extends State
     public function sendData(): void
     {
         $ChatResponse = new ChatResponse($this->context->chat->getId());
-        $ChatResponse->sendText("Прикрепите фото подписанного акта выполненных работ", false);
+        $ChatResponse->sendTextWithCancel("Прикрепите фото подписанного акта выполненных работ");
     }
 }

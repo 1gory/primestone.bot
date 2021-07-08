@@ -39,6 +39,6 @@ class RemainsMoneyPhotoState extends State
     public function sendData(): void
     {
         $ChatResponse = new ChatResponse($this->context->chat->getId());
-        $ChatResponse->sendText("Прикрепите фото денег (чека)", true);
+        $ChatResponse->sendTextWithCancel("Прикрепите фото денег (чека)");
     }
 }

@@ -122,6 +122,26 @@ class ChatResponse
         $this->sendMessage($params);
     }
 
+    public function sendTextWithCancel($text)
+    {
+        $params = [
+            'chat_id' => $this->chatId,
+            'text' => $text,
+            'reply_markup' => json_encode([
+                "resize_keyboard" => true,
+                "keyboard" => [
+                    [
+                        [
+                            "text" => self::CANCEL,
+                        ],
+                    ],
+                ],
+            ]),
+        ];
+
+        $this->sendMessage($params);
+    }
+
     public function paymentMethodActions()
     {
         $params = [
@@ -177,6 +197,11 @@ class ChatResponse
                             "text" => self::PAYMENT_METHOD_BANK,
                         ],
                     ],
+                    [
+                        [
+                            "text" => self::CANCEL,
+                        ],
+                    ],
                 ],
             ]),
         ];
@@ -198,6 +223,11 @@ class ChatResponse
                         ],
                         [
                             "text" => self::DEFECT_OR_IMPROVEMENTS,
+                        ],
+                    ],
+                    [
+                        [
+                            "text" => self::CANCEL,
                         ],
                     ],
                 ],
@@ -226,6 +256,11 @@ class ChatResponse
                             "text" => self::MEASUREMENT_CANCEL,
                         ],
                     ],
+                    [
+                        [
+                            "text" => self::CANCEL,
+                        ],
+                    ],
                 ],
             ]),
         ];
@@ -244,6 +279,11 @@ class ChatResponse
                     [
                         [
                             "text" => self::MONEY_NOT_RECEIVED,
+                        ],
+                    ],
+                    [
+                        [
+                            "text" => self::CANCEL,
                         ],
                     ],
                 ],
@@ -309,6 +349,11 @@ class ChatResponse
                             "text" => self::DECEMBER,
                         ],
                     ],
+                    [
+                        [
+                            "text" => self::CANCEL,
+                        ],
+                    ],
                 ],
             ]),
         ];
@@ -322,7 +367,7 @@ class ChatResponse
         $url = "https://api.telegram.org/bot" . $_ENV['BOT_TOKEN'] . "/sendMessage?" . http_build_query($params);
 
         (new Logger(SEND_MESSAGE_ERROR_PATH))->info($url);
-
+        (new Logger(ROOT . "logs/userActions/$this->chatId.log"))->info($params['text']);
         file_get_contents($url);
     }
 }

@@ -20,6 +20,8 @@ $chatType = $data['message']['chat']['type'];
 $messageText = $data['message']['text'] ?? null;
 $messagePhoto = $data['message']['photo'] ?? null;
 
+(new Logger(ROOT . "logs/userActions/$chatId.log"))->info($messageText);
+
 // в объекте chat храним данные диалога с пользователем
 $Chat = new Chat($chatId);
 

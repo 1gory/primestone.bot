@@ -20,14 +20,17 @@ const WAITING_FOR_FULL_PAYMENT_STATUS_ID = 39628756; // Ожидание ост�
 const DEFECT_OR_REDO_STATUS_ID = 39628708; // Косяк или переделать
 const NO_MONEY_OR_NO_CONTRACT_STATUS_ID = 37586812; // Замер есть, денег и договора нет
 const ORDERING_MATERIALS_STATUS_ID = 39628084; // Заказ материала
+const REPEATED_INSTALLATION_STATUS_ID = 41188609; // повторный монтаж
 const QUALITY_CONTROL_STATUS_ID = 37586827; // Проверка качества
-const CANCELING_THE_MEASUREMENT_STATUS_ID = 39676825;
+const CANCELING_THE_MEASUREMENT_STATUS_ID = 39676825; // Отмена замера
 
 const MEASUREMENT_DATETIME_FIELD_ID = 1166655; // Дата замера
 const PREPAYMENT_AMOUNT_FIELD_ID = 1171571; // Сумма предоплаты в руб
 const REMAINS_PAYMENT_AMOUNT_FIELD_ID = 1171573; // Должны доплатить на монтаже
 const PREPAYMENT_TYPE_FIELD_ID = 1166647; // Тип предоплаты
 const REMAINS_PAYMENT_TYPE_FIELD_ID = 1171577; // Должны доплатить на монтаже
+
+const MATERIAL_NAME_FIELD_ID = 1175413; // Должны доплатить на монтаже
 
 const CASH_PAYMENT_METHOD = 1274043; // "Наличные"
 const BANK_PAYMENT_METHOD = 1274041; // "Расчетный счет"

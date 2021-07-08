@@ -62,21 +62,22 @@ class GoogleCalendarData
         $calendarId = null;
 
         $calendarsForDelete = $calendarList['items'];
-        foreach ($calendarList['items'] as $key => $calendar) {
-            foreach ($usersNames as $userName) {
+
+        foreach ($usersNames as $userName) {
+            foreach ($calendarList['items'] as $key => $calendar) {
                 if ($calendar['summary'] === $userName) {
                     unset($calendarsForDelete[$key]);
                     continue(2);
                 }
-                $calendarsForAdding[] = $userName;
             }
+            $calendarsForAdding[] = $userName;
         }
 
         foreach ($calendarsForAdding as $calendarName) {
             $calendar = new Google_Service_Calendar_Calendar();
             $calendar->setSummary($calendarName);
             $calendar->setTimeZone('Europe/Moscow');
-
+            BotLogger::logIt("Создаю календарь $calendarName");
             $service->calendars->insert($calendar);
         }
 

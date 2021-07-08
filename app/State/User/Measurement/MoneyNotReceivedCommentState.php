@@ -15,6 +15,6 @@ class MoneyNotReceivedCommentState extends State
     public function sendData(): void
     {
         $ChatResponse = new ChatResponse($this->context->chat->getId());
-        $ChatResponse->sendText('Коментарий (Укажите причину)');
+        $ChatResponse->sendTextWithCancel('Коментарий (Укажите причину)');
     }
 }

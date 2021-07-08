@@ -10,6 +10,7 @@ class AmoCrmData
 
         $query = "filter[statuses][1][pipeline_id]=" . MAIN_PIPELINE_ID . "&filter[statuses][1][status_id]=" . MEASUREMENT_DATE_AGREED_STATUS_ID
             . "&filter[statuses][2][pipeline_id]=" . MAIN_PIPELINE_ID . "&filter[statuses][2][status_id]=" . INSTALLATION_STATUS_ID
+            . "&filter[statuses][3][pipeline_id]=" . MAIN_PIPELINE_ID . "&filter[statuses][3][status_id]=" . REPEATED_INSTALLATION_STATUS_ID
             . "&with=contacts"
         ;
 
@@ -39,7 +40,7 @@ class AmoCrmData
             }
 
             // проверка назначенного монтажника в статусе "Монтаж"
-            if ($lead['status_id'] === INSTALLATION_STATUS_ID) {
+            if ($lead['status_id'] === INSTALLATION_STATUS_ID || $lead['status_id'] === REPEATED_INSTALLATION_STATUS_ID) {
                 $installerName = self::getCustomField($lead['custom_fields_values'], 'Монтажник');
                 if ($installerName !== $userName) {
                     continue;
@@ -51,7 +52,7 @@ class AmoCrmData
         }
 
         $today = date('d.m.y', strtotime('00:00'));
-        $tomorrow = date('d.m.y', strtotime('tomorrow 00:00'));
+        $tomorrow = date('d.m.y', strtotime('tomorrow 00:00 + 1days'));
         $tasksText = "Задачи на сегодня и завтра\r\n($today - $tomorrow):\r\n\r\n";
 
         if (empty($filteredAmoLeads) || empty($googleCalendarTasks)) {

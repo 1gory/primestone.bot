@@ -26,6 +26,6 @@ class OrderPriceState extends State
     public function sendData(): void
     {
         $ChatResponse = new ChatResponse($this->context->chat->getId());
-        $ChatResponse->sendText('Введите расчитанную сумму (смету) заказа', true);
+        $ChatResponse->sendTextWithCancel('Введите расчитанную сумму (смету) заказа');
     }
 }

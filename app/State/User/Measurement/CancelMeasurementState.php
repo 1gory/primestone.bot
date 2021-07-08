@@ -32,6 +32,6 @@ class CancelMeasurementState extends State
     public function sendData(): void
     {
         $ChatResponse = new ChatResponse($this->context->chat->getId());
-        $ChatResponse->sendText('Укажите причину отказа');
+        $ChatResponse->sendTextWithCancel('Укажите причину отказа');
     }
 }

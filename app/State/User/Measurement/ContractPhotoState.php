@@ -32,6 +32,6 @@ class ContractPhotoState extends State
     public function sendData(): void
     {
         $ChatResponse = new ChatResponse($this->context->chat->getId());
-        $ChatResponse->sendText("Прикрепите фото договора", true);
+        $ChatResponse->sendTextWithCancel("Прикрепите фото договора");
     }
 }

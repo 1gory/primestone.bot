@@ -8,8 +8,8 @@ class MeasurementState extends State
 
         switch ($message) {
             case ChatResponse::MEASUREMENT_DONE:
-                $this->context->chat->setState(DesignPhotoState::class);
-                $this->context->transitionTo(new DesignPhotoState());
+                $this->context->chat->setState(MaterialNameState::class);
+                $this->context->transitionTo(new MaterialNameState());
                 break;
             case ChatResponse::MEASUREMENT_RESCHEDULE:
                 $this->context->chat->setState(RescheduleMeasurementMonthState::class);

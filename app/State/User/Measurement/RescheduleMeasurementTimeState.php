@@ -53,6 +53,6 @@ RescheduleMeasurementTimeState extends State
     public function sendData(): void
     {
         $ChatResponse = new ChatResponse($this->context->chat->getId());
-        $ChatResponse->sendText('Отправьте Время в формате 12:15');
+        $ChatResponse->sendTextWithCancel('Отправьте Время в формате 12:15');
     }
 }

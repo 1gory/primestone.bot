@@ -40,6 +40,6 @@ class DefectCommentState extends State
     public function sendData(): void
     {
         $ChatResponse = new ChatResponse($this->context->chat->getId());
-        $ChatResponse->sendText("Напишите комментарий");
+        $ChatResponse->sendTextWithCancel("Напишите комментарий");
     }
 }

@@ -15,6 +15,6 @@ class RescheduleMeasurementDateState extends State
     public function sendData(): void
     {
         $ChatResponse = new ChatResponse($this->context->chat->getId());
-        $ChatResponse->sendText('Отправьте число месяца');
+        $ChatResponse->sendTextWithCancel('Отправьте число месяца');
     }
 }

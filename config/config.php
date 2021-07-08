@@ -11,6 +11,8 @@ const ADMINS_USERNAME = [
     'pro_panch'
 ];
 
+const BOT_NAME = 'primestone.bot';
+
 const ROOT =  __DIR__ . '/../';
 
 const DEBUG_PATH = ROOT . '/logs/debug.log';
@@ -28,6 +30,7 @@ const AMOCRM_TOKENS_PATH = CREDENTIALS_DIR . '/amocrm_tokens.json';
 
 require_once ROOT . '/lib/Autoloader.php';
 require_once ROOT . '/lib/Logger.php';
+require_once ROOT . '/lib/BotLogger.php';
 require ROOT . '/vendor/autoload.php';
 
 Autoloader::setFileExt('.php');

@@ -28,6 +28,6 @@ class TabletopPhotoState extends State
     public function sendData(): void
     {
         $ChatResponse = new ChatResponse($this->context->chat->getId());
-        $ChatResponse->sendText("Прикрепите фото готовой столешницы", true);
+        $ChatResponse->sendTextWithCancel("Прикрепите фото готовой столешницы");
     }
 }

@@ -26,13 +26,14 @@ class UserState extends State
         $ChatResponse = new ChatResponse($this->context->chat->getId());
         $userName = User::getUserNameByLogin($this->context->userName);
         $data = AmoCrmData::getTasksData($userName);
-        $this->context->chat->setStepData($data['leadsIds'], 'leadsIds');
-        $this->context->chat->setStepData($data['leadsType'], 'leadsType');
-        $this->context->chat->setStepData($data['googleEventsIds'], 'googleEventsIds');
 
         if (!count($data['leadsIds'])) {
             $ChatResponse->sendText('Задачи на сегодня и завтра отсутсвтуют', true);
         } else {
+            $this->context->chat->setStepData($data['leadsIds'], 'leadsIds');
+            $this->context->chat->setStepData($data['leadsType'], 'leadsType');
+            $this->context->chat->setStepData($data['googleEventsIds'], 'googleEventsIds');
+
             $ChatResponse->showAllTasks($data['text'], count($data['leadsIds']));
             $ChatResponse->sendText('Выберете номер задачи', false);
         }

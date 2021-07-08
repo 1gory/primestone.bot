@@ -27,6 +27,6 @@ class DesignPhotoState extends State
     public function sendData(): void
     {
         $ChatResponse = new ChatResponse($this->context->chat->getId());
-        $ChatResponse->sendText("Прикрепите фото чертежа", true);
+        $ChatResponse->sendTextWithCancel("Прикрепите фото чертежа");
     }
 }
