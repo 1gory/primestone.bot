@@ -23,6 +23,10 @@ class AmoCrmData
             ];
         }
 
+        function sanitize($text) {
+            return preg_replace(['/\*/','/_/','/\[/','/`/'], ['\\*','\\_','\\[','\\`'], $text);
+        }
+
         // фильтруем лиды
         $filteredAmoLeads = [];
         foreach ($leads['_embedded']['leads'] as $lead) {
@@ -93,11 +97,11 @@ class AmoCrmData
                 $measurementComment = '';
                 if ($lead['status_id'] === MEASUREMENT_DATE_AGREED_STATUS_ID) {
                     $type = 'Замер';
-                    $measurementComment = self::getCustomField($lead['custom_fields_values'], 'Комментарии для замерщика');
+                    $measurementComment = sanitize(self::getCustomField($lead['custom_fields_values'], 'Комментарии для замерщика'));
                     $preliminarilyCost = (int) self::getCustomField($lead['custom_fields_values'], 'Предварительная стоимость');
                 } elseif ($lead['status_id'] === INSTALLATION_STATUS_ID) {
                     $type = 'Монтаж';
-                    $installationComment = self::getCustomField($lead['custom_fields_values'], 'Комментарии для монтажника');
+                    $installationComment = sanitize(self::getCustomField($lead['custom_fields_values'], 'Комментарии для монтажника'));
                     $surcharge = (int) self::getCustomField($lead['custom_fields_values'], 'Должны доплатить на монтаже');
                 }
 
@@ -114,7 +118,7 @@ class AmoCrmData
                     $tasksText .= '*Телефон*: ' . self::getCustomField($res['custom_fields_values'], 'Телефон') . "\r\n";
                 }
 
-                $tasksText .= '*Адрес клиента*: ' . self::getCustomField($lead['custom_fields_values'], 'Адрес клиента') . "\r\n";
+                $tasksText .= '*Адрес клиента*: ' . sanitize(self::getCustomField($lead['custom_fields_values'], 'Адрес клиента')) . "\r\n";
 
                 $tasksText .= $preliminarilyCost ? '*Предварительная стоимость*: ' . $preliminarilyCost . "\r\n" : '';
                 $tasksText .= $surcharge ? '*Доплата на монтаже*: ' . $surcharge . "\r\n" : '';

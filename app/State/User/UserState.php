@@ -35,7 +35,7 @@ class UserState extends State
             $this->context->chat->setStepData($data['googleEventsIds'], 'googleEventsIds');
 
             $ChatResponse->showAllTasks($data['text'], count($data['leadsIds']));
-            $ChatResponse->sendText('Выберете номер задачи', false);
+            $ChatResponse->sendText('Выберите номер задачи', false);
         }
     }
 }
