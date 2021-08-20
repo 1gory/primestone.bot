@@ -11,20 +11,6 @@ class PrepaymentAmountState extends State
         $leadId = $data['leadsIds'][$index];
         $connector = new AmoCrmConnector(AMOCRM_TOKENS_PATH);
 
-        if ($message === ChatResponse::MONEY_NOT_RECEIVED) {
-            $data = [
-                "id" => (int)$leadId,
-                "status_id" => NO_MONEY_OR_NO_CONTRACT_STATUS_ID,
-            ];
-
-            $connector->updateLeads($data);
-            $connector->createTask($leadId, 'Связаться с клиентом', strtotime("+1 days"));
-
-            $this->context->chat->setState(MoneyNotReceivedCommentState::class);
-            $this->context->transitionTo(new MoneyNotReceivedCommentState());
-            return;
-        }
-
         $prepayment = $message;
 
         $remains = $data['orderPrice'] - $prepayment;

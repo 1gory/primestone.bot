@@ -152,14 +152,13 @@ class AmoCrmConnector
     /**
      * @param $amoLeadId
      * @param $message
-     * @param string $completeTill timestamp
-     * @return null
-     * @throws Exception
+     * @param $completeTill
+     * @param int $responsibleUserId
      */
-    public function createTask($amoLeadId, $message, $completeTill)
+    public function createTask($amoLeadId, $message, $completeTill, $responsibleUserId = MANAGER_ID)
     {
         $data[] = [
-            "responsible_user_id" => MANAGER_ID,
+            "responsible_user_id" => $responsibleUserId,
             "complete_till" => $completeTill,
             'entity_id' => $amoLeadId,
             "entity_type" => "leads",

@@ -27,6 +27,16 @@ class MoneyPhotoState extends State
         ];
 
         $connector->updateLeads($data);
+        $text = <<<EOD
+Сделать расчет материала и поставить задачу на офис на заказ
+1. Название материала
+2. Количество листов
+3. Мойка (Если да, то какая)
+4. Сколько тюбиков клея
+5. Ответственный за заказ: ФИО
+EOD;
+
+        $connector->createTask($leadId, $text, strtotime("+1 days"), MANUFACTURE_ID);
 
         $this->context->chat->setState(ContractPhotoState::class);
         $this->context->transitionTo(new ContractPhotoState());

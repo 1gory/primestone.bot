@@ -4,13 +4,15 @@ class ChatResponse
 {
     const REFRESH_USERS = "Обновить персонал";
     const CANCEL = "Отмена";
+    const YES = "Да";
+    const NO = "Нет";
 
     const RENEW_TASKS = "Обновить задачи";
 
     const SUCCESSFUL_INSTALLATION = "Успешный монтаж";
     const DEFECT_OR_IMPROVEMENTS = "Косяк или доработки";
 
-    const MEASUREMENT_DONE = "Замер готов";
+    const MEASUREMENT_DONE = "Я на замере";
     const MEASUREMENT_RESCHEDULE = "Перенос замера";
     const MEASUREMENT_CANCEL = "Отмена замера";
 
@@ -278,12 +280,32 @@ class ChatResponse
                 "keyboard" => [
                     [
                         [
-                            "text" => self::MONEY_NOT_RECEIVED,
+                            "text" => self::CANCEL,
+                        ],
+                    ],
+                ],
+            ]),
+        ];
+
+        $this->sendMessage($params);
+    }
+
+    public function ReceivingMoneyActions()
+    {
+        $params = [
+            'chat_id' => $this->chatId,
+            'text' => 'Деньги получены?',
+            'reply_markup' => json_encode([
+                "resize_keyboard" => true,
+                "keyboard" => [
+                    [
+                        [
+                            "text" => self::YES,
                         ],
                     ],
                     [
                         [
-                            "text" => self::CANCEL,
+                            "text" => self::NO,
                         ],
                     ],
                 ],
