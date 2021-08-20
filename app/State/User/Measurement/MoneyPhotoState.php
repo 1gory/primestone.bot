@@ -38,6 +38,9 @@ EOD;
 
         $connector->createTask($leadId, $text, strtotime("+1 days"), MANUFACTURE_ID);
 
+        $text = 'Проконтролировать прием средств';
+        $connector->createTask($leadId, $text, strtotime("+1 days"), MANAGER_ID);
+
         $this->context->chat->setState(ContractPhotoState::class);
         $this->context->transitionTo(new ContractPhotoState());
     }
