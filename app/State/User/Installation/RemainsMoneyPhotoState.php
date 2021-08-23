@@ -28,6 +28,9 @@ class RemainsMoneyPhotoState extends State
 
         $connector->updateLeads($data);
 
+        $text = 'Проконтролировать прием средств';
+        $connector->createTask($leadId, $text, strtotime("+1 days"), MANAGER_ID);
+
         $ChatResponse = new ChatResponse($this->context->chat->getId());
         $ChatResponse->sendText("Задача закрыта, данные обновлены");
 
